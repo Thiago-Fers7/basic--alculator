@@ -2,6 +2,22 @@
 
 ## Javascript
 
+### Estrutura de Dados
+
+JavaScript é uma linguagem de tipagem dinâmica. Isso significa que você não necessita declarar o tipo de uma variável antes de sua atribuição. O Javascript usa em geral os tipos de dados primitivos e alguns deles são: 
+
+- Boolean
+- String
+- Number
+- Object
+
+Temos outros tipos de dados utilizados, tais como Null, Undefined, Symbol e etc, onde saberá com mais detalhes em: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Data_structures
+
+Para complementar seus estudos: 
+
+ - [Sobre tipos primitivos](https://developer.mozilla.org/pt-BR/docs/Glossary/Primitive)
+ - [Sintaxe e tipos](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Grammar_and_types)
+
 ### Variaveis
 
 Existem três tipos de declarações em JavaScript.
@@ -73,7 +89,7 @@ function square(numero) {
 
 São comandos da linguagem que permitem desviar o fluxo do programa, dependendo de um teste.
 
-- https://medium.com/@ericholiveira/controle-de-fluxo-em-javascript-callback-promises-e-generators-9f9e31e7d2ee
+- https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Using_promises
 
 ## GIT
 
@@ -91,13 +107,13 @@ Conflitos no Git são bastante comuns e **acontecem sempre quando o mesmo arquiv
 
 ## Desafio
 
-Neste desafio vocês deverão criar uma calculadora e ela deve pelo menos fazer uma **soma e subtração**.
+Neste desafio vocês deverão criar uma calculadora e ela deve pelo menos fazer duas das 4 operações da matemática: **soma, subtração, multiplicação ou divisão**.
 
 Obrigatório:
 
 - Organize em funções diferentes para cada ação diferente, por exemplo uma função para o click nos botões numéricos e outra função para os botões de operação.
 - Crie a estrutura HTML padrão, **não faça os elementos dinâmicos**. (como no desafio anterior)
-- Personalize a calculadora com CSS, deixe com a cara da calculadora de seu Sistema Operacional.
+- Você pode personalizar a calculadora com CSS, deixe com a cara da calculadora de seu Sistema Operacional.
 
 Para se destacar na execução:
 
