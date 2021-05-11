@@ -1,4 +1,4 @@
-# 02 - Aplicações avançadas em Javascript e GIT
+# 02 - Introdução ao Javascript e Git II 
 
 ## Javascript
 
