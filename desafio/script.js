@@ -17,8 +17,20 @@ const forkCaracteres = {
     fork(key) {
         const display = DOM.finder
 
+        clear.removeZero(display)
+        
         display.textContent += key
     },
+}
+
+const clear = {
+    removeZero(display) {
+        if (display.textContent.indexOf('0') == 0) {
+            display.textContent = ''
+        } else {
+            return
+        }
+    }
 }
 
 DOM.virtualKeybord.addEventListener('click', forkCaracteres.verifyCaracter)
