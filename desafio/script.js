@@ -24,6 +24,23 @@ const forkCaracteres = {
         } else {
             display.textContent += key
         }
+
+        switch(key) {
+            case 'C':
+                clear.clearAll(display)
+                break
+            case '÷':
+                console.log('oi')
+                addText()
+                break
+            case '=':
+                break
+            case '':
+                clear.clearLastNumber(display)
+                break
+            default:
+                addText()
+        }
     },
 }
 
