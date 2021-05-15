@@ -6,10 +6,10 @@ const DOM = {
 const forkCaracteres = {
     verifyCaracter(event) {
         let clickedElement = String(event.srcElement.localName) != 'td'
-        
+
         if (clickedElement) {
             return
-        } else {            
+        } else {
             forkCaracteres.fork(event.toElement.outerText)
         }
     },
@@ -18,8 +18,12 @@ const forkCaracteres = {
         const display = DOM.finder
 
         clear.removeZero(display)
-        
-        display.textContent += key
+
+        if (key == 'C') {
+            clear.clearAll(display)
+        } else {
+            display.textContent += key
+        }
     },
 }
 
@@ -30,6 +34,10 @@ const clear = {
         } else {
             return
         }
+    },
+
+    clearAll(display) {
+        display.textContent = '0'
     }
 }
 
