@@ -55,6 +55,19 @@ const clear = {
 
     clearAll(display) {
         display.textContent = '0'
+    },
+
+    clearLastNumber(display) {
+        const textDisplay = display.textContent
+        const amountNumbers = textDisplay.length - 1
+
+        if (textDisplay == '' || amountNumbers < 1) {
+            clear.clearAll(display)       
+        } else {
+            display.textContent = textDisplay.substring(0, amountNumbers)
+        }
+
+
     }
 }
 
