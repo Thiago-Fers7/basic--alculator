@@ -42,13 +42,14 @@ const forkCaracteres = {
 const calc = {
     mainCalc(simbols, calcValues) {
         let index = 0
-        
+
         let result
-        
+
         simbols.forEach((simbol) => {
+
             const firstNumber = Number(calcValues[index])
             const secondNumber = Number(calcValues[index + 1])
-            
+
             switch (simbol) {
                 case '÷':
                     result = firstNumber / secondNumber
@@ -76,8 +77,15 @@ const calc = {
 
         const simbols = calc.simbols(displayText)
 
-        const re = /[÷\+–x]/
-        const calcValues = displayText.split(re)
+        const arrayValues = displayText.split(/[÷\+–x]/)
+
+        let calcValues = []
+
+        for (let i = 0; i < arrayValues.length; i++) {
+            if (arrayValues[i] != '') {
+                calcValues.push(arrayValues[i])
+            }
+        }
 
         display.textContent = calc.mainCalc(simbols, calcValues)
     },
@@ -87,11 +95,11 @@ const calc = {
 
         let simbols = []
 
-        arraySimbols.forEach((caracter) => {
-            if (caracter == '÷' || caracter == '+' || caracter == '–' || caracter == 'x') {
-                simbols.push(caracter)
+        for (let i = 0; i < arraySimbols.length; i++) {
+            if (arraySimbols[i] == '÷' || arraySimbols[i] == '+' || arraySimbols[i] == '–' || arraySimbols[i] == 'x') {
+                if (arraySimbols[i] != arraySimbols[i + 1]) simbols.push(arraySimbols[i])
             }
-        })
+        }
 
         return simbols
     }
