@@ -19,29 +19,82 @@ const forkCaracteres = {
 
         clear.removeZero(display)
 
-        if (key == 'C') {
-            clear.clearAll(display)
-        } else {
+        function addText() {
             display.textContent += key
         }
 
-        switch(key) {
+        switch (key) {
             case 'C':
                 clear.clearAll(display)
                 break
-            case '÷':
-                console.log('oi')
-                addText()
-                break
             case '=':
+                calc.result(display)
                 break
-            case '':
+            case '': // backspace
                 clear.clearLastNumber(display)
                 break
             default:
                 addText()
         }
     },
+}
+
+const calc = {
+    mainCalc(simbols, calcValues) {
+        let index = 0
+        
+        let result
+        
+        simbols.forEach((simbol) => {
+            const firstNumber = Number(calcValues[index])
+            const secondNumber = Number(calcValues[index + 1])
+            
+            switch (simbol) {
+                case '÷':
+                    result = firstNumber / secondNumber
+                    break
+                case '+':
+                    result = firstNumber + secondNumber
+                    break
+                case '–':
+                    result = firstNumber - secondNumber
+                    break
+                case 'x':
+                    result = firstNumber * secondNumber
+                    break
+            }
+
+            calcValues.splice(index, 1)
+            calcValues[index] = result
+        })
+
+        return result
+    },
+
+    result(display) {
+        const displayText = display.textContent
+
+        const simbols = calc.simbols(displayText)
+
+        const re = /[÷\+–x]/
+        const calcValues = displayText.split(re)
+
+        display.textContent = calc.mainCalc(simbols, calcValues)
+    },
+
+    simbols(displayText) {
+        const arraySimbols = displayText.split('')
+
+        let simbols = []
+
+        arraySimbols.forEach((caracter) => {
+            if (caracter == '÷' || caracter == '+' || caracter == '–' || caracter == 'x') {
+                simbols.push(caracter)
+            }
+        })
+
+        return simbols
+    }
 }
 
 const clear = {
@@ -62,12 +115,10 @@ const clear = {
         const amountNumbers = textDisplay.length - 1
 
         if (textDisplay == '' || amountNumbers < 1) {
-            clear.clearAll(display)       
+            clear.clearAll(display)
         } else {
             display.textContent = textDisplay.substring(0, amountNumbers)
         }
-
-
     }
 }
 
