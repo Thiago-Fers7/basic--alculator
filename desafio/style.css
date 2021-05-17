@@ -127,3 +127,13 @@ body footer {
     bottom: 2rem;
     color: white;
 }
+
+@media (max-width: 520px) {
+    body {
+        padding: 1rem;
+    }
+
+    body main {
+        max-width: 100%;
+    }
+}
