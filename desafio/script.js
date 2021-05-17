@@ -75,25 +75,47 @@ const calc = {
             )
             return displayText.replace('.',',')
         } else {
-            return String(result.toFixed(2).replace('.', ','))
+            return String(result.toLocaleString('pt-BR', {
+                minimunFractionDigits: 2,
+                maximumFractionDigits: 2
+            }))
+        }
+    },
+
+    fixSubtraction(displayText) {
+        let simbol
+        displayText = displayText.split('')
+
+        if (displayText[0] == '–' || displayText[0] == '+') {
+            simbol = displayText.splice(0, 1)
+        }
+        
+        return {
+            newText: displayText.join(''),
+            auxSimbol: simbol
         }
     },
 
     result(display) {
-        let displayText = display.textContent
+        let displayText = display.textContent.replace(/,/g, '.')
 
-        displayText = displayText.replace(/,/g, '.')
+        let {newText, auxSimbol} = calc.fixSubtraction(displayText)
 
-        const simbols = calc.simbols(displayText)
+        const simbols = calc.simbols(newText)
 
-        const arrayValues = displayText.split(/[÷\+–x]/)
+        const arrayValues = newText.split(/[÷\+–x]/)
 
         let calcValues = []
-
+        
         for (let i = 0; i < arrayValues.length; i++) {
             if (arrayValues[i] != '') {
                 calcValues.push(arrayValues[i])
             }
+        }
+
+        if (auxSimbol) {
+            if (auxSimbol == '–') auxSimbol = '-'
+            calcValues[0] = `${auxSimbol}${calcValues[0]}`
         }
 
         display.textContent = calc.mainCalc(simbols, calcValues, displayText)

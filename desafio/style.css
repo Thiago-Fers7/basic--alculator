@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: 0;
+    box-sizing: border-box;
 }
 
 body,
@@ -72,6 +72,8 @@ main section table thead tr td {
     padding: 0 1rem;
     font-size: 2.5rem;
     font-weight: 600;
+
+    word-break: break-all;
 }
 
 main section table tbody tr {
