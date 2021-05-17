@@ -8,7 +8,7 @@ const forkCaracteres = {
         let clickedElement = String(event.srcElement.localName) != 'td'
 
         if (clickedElement) {
-            return
+            return 
         } else {
             forkCaracteres.fork(event.toElement.outerText)
         }
@@ -16,7 +16,7 @@ const forkCaracteres = {
 
     fork(key) {
         const display = DOM.finder
-
+        
         clear.removeZero(display)
 
         function addText() {
@@ -36,18 +36,18 @@ const forkCaracteres = {
             default:
                 addText()
         }
-    },
+    }
 }
 
 const calc = {
-    mainCalc(simbols, calcValues) {
+    mainCalc(simbols, calcValues, displayText) {
         let index = 0
 
         let result
 
         simbols.forEach((simbol) => {
-
             const firstNumber = Number(calcValues[index])
+
             const secondNumber = Number(calcValues[index + 1])
 
             switch (simbol) {
@@ -69,11 +69,20 @@ const calc = {
             calcValues[index] = result
         })
 
-        return result
+        if (result == undefined || isNaN(result)) {
+            new Error(
+                alert('Erro: o cálculo não faz sentido\nTente novamente')
+            )
+            return displayText.replace('.',',')
+        } else {
+            return String(result.toFixed(2).replace('.', ','))
+        }
     },
 
     result(display) {
-        const displayText = display.textContent
+        let displayText = display.textContent
+
+        displayText = displayText.replace(/,/g, '.')
 
         const simbols = calc.simbols(displayText)
 
@@ -87,7 +96,7 @@ const calc = {
             }
         }
 
-        display.textContent = calc.mainCalc(simbols, calcValues)
+        display.textContent = calc.mainCalc(simbols, calcValues, displayText)
     },
 
     simbols(displayText) {
