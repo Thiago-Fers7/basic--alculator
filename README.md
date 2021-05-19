@@ -2,4 +2,4 @@
 
 <hr>
 
-<img src="./img-project/print-calculator.png">
+<img src="./desafio/img-project/print-calculator.png">

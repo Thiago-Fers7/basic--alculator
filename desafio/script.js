@@ -55,7 +55,7 @@ const calc = {
         simbols.forEach((simbol) => {
             const firstNumber = Number(calcValues[index].replace(/\./g, '').replace(',', '.'))
 
-            const secondNumber = Number(calcValues[index + 1].replace(',', '.'))
+            const secondNumber = Number(calcValues[index + 1] ? calcValues[index + 1].replace(',', '.') : calcValues[index + 1])
 
             switch (simbol) {
                 case '÷':
@@ -75,7 +75,7 @@ const calc = {
             calcValues.splice(index, 1)
             calcValues[index] = result
         })
-
+        
         if (result === undefined || isNaN(result)) {
             new Error(alert('Erro: o cálculo não faz sentido\nTente novamente'))
 
