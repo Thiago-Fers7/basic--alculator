@@ -53,6 +53,8 @@ const calc = {
         let result
 
         simbols.forEach((simbol) => {
+            console.log(calcValues)
+
             const firstNumber = Number(calcValues[index].replace(/\./g, '').replace(',', '.'))
 
             const secondNumber = Number(calcValues[index + 1] ? calcValues[index + 1].replace(',', '.') : calcValues[index + 1])
@@ -73,7 +75,7 @@ const calc = {
             }
 
             calcValues.splice(index, 1)
-            calcValues[index] = result
+            calcValues[index] = String(result)
         })
         
         if (result === undefined || isNaN(result)) {
