@@ -75,7 +75,10 @@ const calc = {
             }
 
             calcValues.splice(index, 1)
-            calcValues[index] = String(result)
+            calcValues[index] = String(result.toLocaleString('pt-BR', {
+                minimunFractionDigits: 2,
+                maximumFractionDigits: 2
+            }))
         })
         
         if (result === undefined || isNaN(result)) {
