@@ -8,7 +8,7 @@ const forkCaracteres = {
         let clickedElement = String(event.srcElement.localName) != 'td'
 
         if (clickedElement) {
-            return 
+            return
         } else {
             forkCaracteres.fork(event.toElement.outerText)
         }
@@ -16,11 +16,18 @@ const forkCaracteres = {
 
     fork(key) {
         const display = DOM.finder
-        
-        clear.removeZero(display)
 
         function addText() {
+            let isZero = display.textContent === '0' ? true : false
+
             display.textContent += key
+
+            let arrayTextDisplay = display.textContent.split('')
+
+            if (arrayTextDisplay.indexOf(',') != 1 && isZero) {
+                arrayTextDisplay.splice(0,1)
+                display.textContent = arrayTextDisplay.join('')
+            }
         }
 
         switch (key) {
@@ -46,9 +53,9 @@ const calc = {
         let result
 
         simbols.forEach((simbol) => {
-            const firstNumber = Number(calcValues[index])
+            const firstNumber = Number(calcValues[index].replace(/\./g, '').replace(',', '.'))
 
-            const secondNumber = Number(calcValues[index + 1])
+            const secondNumber = Number(calcValues[index + 1].replace(',', '.'))
 
             switch (simbol) {
                 case '÷':
@@ -69,11 +76,10 @@ const calc = {
             calcValues[index] = result
         })
 
-        if (result == undefined || isNaN(result)) {
-            new Error(
-                alert('Erro: o cálculo não faz sentido\nTente novamente')
-            )
-            return displayText.replace('.',',')
+        if (result === undefined || isNaN(result)) {
+            new Error(alert('Erro: o cálculo não faz sentido\nTente novamente'))
+
+            return displayText
         } else {
             return String(result.toLocaleString('pt-BR', {
                 minimunFractionDigits: 2,
@@ -86,10 +92,10 @@ const calc = {
         let simbol
         displayText = displayText.split('')
 
-        if (displayText[0] == '–' || displayText[0] == '+') {
+        if (displayText[0] === '–' || displayText[0] === '+') {
             simbol = displayText.splice(0, 1)
         }
-        
+
         return {
             newText: displayText.join(''),
             auxSimbol: simbol
@@ -97,16 +103,16 @@ const calc = {
     },
 
     result(display) {
-        let displayText = display.textContent.replace(/,/g, '.')
+        let displayText = display.textContent
 
-        let {newText, auxSimbol} = calc.fixSubtraction(displayText)
+        let { newText, auxSimbol } = calc.fixSubtraction(displayText)
 
         const simbols = calc.simbols(newText)
 
         const arrayValues = newText.split(/[÷\+–x]/)
 
         let calcValues = []
-        
+
         for (let i = 0; i < arrayValues.length; i++) {
             if (arrayValues[i] != '') {
                 calcValues.push(arrayValues[i])
@@ -114,7 +120,7 @@ const calc = {
         }
 
         if (auxSimbol) {
-            if (auxSimbol == '–') auxSimbol = '-'
+            if (auxSimbol === '–') auxSimbol = '-'
             calcValues[0] = `${auxSimbol}${calcValues[0]}`
         }
 
@@ -127,7 +133,7 @@ const calc = {
         let simbols = []
 
         for (let i = 0; i < arraySimbols.length; i++) {
-            if (arraySimbols[i] == '÷' || arraySimbols[i] == '+' || arraySimbols[i] == '–' || arraySimbols[i] == 'x') {
+            if (arraySimbols[i] === '÷' || arraySimbols[i] === '+' || arraySimbols[i] === '–' || arraySimbols[i] === 'x') {
                 if (arraySimbols[i] != arraySimbols[i + 1]) simbols.push(arraySimbols[i])
             }
         }
@@ -137,14 +143,6 @@ const calc = {
 }
 
 const clear = {
-    removeZero(display) {
-        if (display.textContent.indexOf('0') == 0) {
-            display.textContent = ''
-        } else {
-            return
-        }
-    },
-
     clearAll(display) {
         display.textContent = '0'
     },
@@ -153,7 +151,7 @@ const clear = {
         const textDisplay = display.textContent
         const amountNumbers = textDisplay.length - 1
 
-        if (textDisplay == '' || amountNumbers < 1) {
+        if (textDisplay === '' || amountNumbers < 1) {
             clear.clearAll(display)
         } else {
             display.textContent = textDisplay.substring(0, amountNumbers)
