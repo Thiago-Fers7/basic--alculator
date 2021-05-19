@@ -52,6 +52,13 @@ const calc = {
 
         let result
 
+        function transformToStringLocale(number) {
+            return String(number.toLocaleString('pt-BR', {
+                minimunFractionDigits: 2,
+                maximumFractionDigits: 2
+            }))
+        }
+
         simbols.forEach((simbol) => {
             console.log(calcValues)
 
@@ -75,21 +82,17 @@ const calc = {
             }
 
             calcValues.splice(index, 1)
-            calcValues[index] = String(result.toLocaleString('pt-BR', {
-                minimunFractionDigits: 2,
-                maximumFractionDigits: 2
-            }))
+            calcValues[index] = transformToStringLocale(result)
         })
+
+        
         
         if (result === undefined || isNaN(result)) {
             new Error(alert('Erro: o cálculo não faz sentido\nTente novamente'))
 
             return displayText
         } else {
-            return String(result.toLocaleString('pt-BR', {
-                minimunFractionDigits: 2,
-                maximumFractionDigits: 2
-            }))
+            return transformToStringLocale(result)
         }
     },
 
